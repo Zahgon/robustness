@@ -25,27 +25,18 @@ from torch import nn
 
 
 def split_model(model):
-    if not isinstance(model, torchvision.models.ResNet):
-        print("Only resnet models defined for this analysis so far")
-    return model.bn1, model.layer1, model.layer2, model.layer3, model.layer4
+    pass
 
 
 def use_train_statistics(module):
-    if isinstance(module, nn.BatchNorm2d):
-        print(f"Setting {module} to adaptive")
-        module.train()
+    pass
 
 
 def choose_one_adaptation(model, stage):
     """select exactly on stage for adaptation"""
-    assert stage >= 0 and stage < 5
-    model.eval()
-    split_model(model)[stage].apply(use_train_statistics)
+    pass
 
 
 def leave_one_out_adaptation(model, stage):
     """set all BN layers to train mode except for ones in the selected stage"""
-    assert stage >= 0 and stage < 5
-    model.eval()
-    model.apply(use_train_statistics)
-    split_model(model)[stage].eval()
+    pass

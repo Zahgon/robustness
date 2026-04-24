@@ -25,13 +25,8 @@ from robusta.selflearning.nn import EntropyLoss, GeneralizedCrossEntropy
 
 
 def _iter_params(model):
-    for module in model.modules():
-        if isinstance(module, torch.nn.BatchNorm2d):
-            for parameter in module.parameters():
-                yield parameter
+    pass
 
 
 def adapt(model, adapt_type="affine"):
-    if adapt_type not in ["affine"]:
-        raise ValueError(adapt_type)
-    return iter(_iter_params(model))
+    pass

@@ -57,9 +57,7 @@ class RemappedImageNet:
         super().__init__()
 
     def map_logits(self, logits):
-        output = logits[:, imagenet_r_mask]
-        return output
+        pass
 
     def accuracy_metric(self, logits, targets):
-        logits200 = self.map_logits(logits)
-        super().accuracy_metric(logits200, targets)
+        pass

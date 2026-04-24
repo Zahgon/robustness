@@ -29,9 +29,7 @@ class GeneralizedCrossEntropy(nn.Module):
         self.q = q
 
     def forward(self, logits, target=None):
-        if target is None:
-            target = logits.argmax(dim=1)
-        return RF.gce(logits, target, self.q)
+        pass
 
 
 class EntropyLoss(nn.Module):
@@ -40,8 +38,4 @@ class EntropyLoss(nn.Module):
         self.stop_teacher_gradient = stop_teacher_gradient
 
     def forward(self, logits, target=None):
-        if target is None:
-            target = logits
-        if self.top_teacher_gradient:
-            target = target.detach()
-        return RF.entropy(logits, target, self.q)
+        pass

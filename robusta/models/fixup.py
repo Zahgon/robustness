@@ -51,14 +51,12 @@ __all__ = [
 
 def conv3x3(in_planes, out_planes, stride=1):
     """3x3 convolution with padding"""
-    return nn.Conv2d(
-        in_planes, out_planes, kernel_size=3, stride=stride, padding=1, bias=False
-    )
+    pass
 
 
 def conv1x1(in_planes, out_planes, stride=1):
     """1x1 convolution"""
-    return nn.Conv2d(in_planes, out_planes, kernel_size=1, stride=stride, bias=False)
+    pass
 
 
 class FixupBasicBlock(nn.Module):
@@ -79,21 +77,7 @@ class FixupBasicBlock(nn.Module):
         self.stride = stride
 
     def forward(self, x):
-        identity = x
-
-        out = self.conv1(x + self.bias1a)
-        out = self.relu(out + self.bias1b)
-
-        out = self.conv2(out + self.bias2a)
-        out = out * self.scale + self.bias2b
-
-        if self.downsample is not None:
-            identity = self.downsample(x + self.bias1a)
-
-        out += identity
-        out = self.relu(out)
-
-        return out
+        pass
 
 
 class FixupBottleneck(nn.Module):
@@ -117,24 +101,7 @@ class FixupBottleneck(nn.Module):
         self.stride = stride
 
     def forward(self, x):
-        identity = x
-
-        out = self.conv1(x + self.bias1a)
-        out = self.relu(out + self.bias1b)
-
-        out = self.conv2(out + self.bias2a)
-        out = self.relu(out + self.bias2b)
-
-        out = self.conv3(out + self.bias3a)
-        out = out * self.scale + self.bias3b
-
-        if self.downsample is not None:
-            identity = self.downsample(x + self.bias1a)
-
-        out += identity
-        out = self.relu(out)
-
-        return out
+        pass
 
 
 class FixupResNet(nn.Module):
@@ -215,60 +182,32 @@ class FixupResNet(nn.Module):
                 nn.init.constant_(m.bias, 0)
 
     def _make_layer(self, block, planes, blocks, stride=1):
-        downsample = None
-        if stride != 1 or self.inplanes != planes * block.expansion:
-            downsample = conv1x1(self.inplanes, planes * block.expansion, stride)
-
-        layers = []
-        layers.append(block(self.inplanes, planes, stride, downsample))
-        self.inplanes = planes * block.expansion
-        for _ in range(1, blocks):
-            layers.append(block(self.inplanes, planes))
-
-        return nn.Sequential(*layers)
+        pass
 
     def forward(self, x):
-        x = self.conv1(x)
-        x = self.relu(x + self.bias1)
-        x = self.maxpool(x)
-
-        x = self.layer1(x)
-        x = self.layer2(x)
-        x = self.layer3(x)
-        x = self.layer4(x)
-
-        x = self.avgpool(x)
-        x = x.view(x.size(0), -1)
-        x = self.fc(x + self.bias2)
-
-        return x
+        pass
 
 
 def fixup_resnet18(**kwargs):
     """Constructs a Fixup-ResNet-18 model."""
-    model = FixupResNet(FixupBasicBlock, [2, 2, 2, 2], **kwargs)
-    return model
+    pass
 
 
 def fixup_resnet34(**kwargs):
     """Constructs a Fixup-ResNet-34 model."""
-    model = FixupResNet(FixupBasicBlock, [3, 4, 6, 3], **kwargs)
-    return model
+    pass
 
 
 def fixup_resnet50(**kwargs):
     """Constructs a Fixup-ResNet-50 model."""
-    model = FixupResNet(FixupBottleneck, [3, 4, 6, 3], **kwargs)
-    return model
+    pass
 
 
 def fixup_resnet101(**kwargs):
     """Constructs a Fixup-ResNet-101 model."""
-    model = FixupResNet(FixupBottleneck, [3, 4, 23, 3], **kwargs)
-    return model
+    pass
 
 
 def fixup_resnet152(**kwargs):
     """Constructs a Fixup-ResNet-152 model."""
-    model = FixupResNet(FixupBottleneck, [3, 8, 36, 3], **kwargs)
-    return model
+    pass

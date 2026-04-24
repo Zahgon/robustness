@@ -19,7 +19,7 @@ class ZeroOneResNet50_parallel(nn.Module):
 
     def forward(self, input):
         # input = (input - self.mean) / self.std
-        return self.resnet(input)
+        pass
 
 
 class ZeroOneInceptionV3(nn.Module):
@@ -37,4 +37,4 @@ class ZeroOneInceptionV3(nn.Module):
 
     def forward(self, input):
         # input = (input - self.mean) / self.std
-        return self.inception(input)
+        pass

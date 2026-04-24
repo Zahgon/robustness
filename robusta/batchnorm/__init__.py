@@ -22,10 +22,4 @@ import torch.nn
 
 
 def adapt(model, adapt_type="batch_wise"):
-    if adapt_type not in ["batch_wise"]:
-        raise ValueError(adapt_type)
-    model.eval()
-    for module in model.modules():
-        if isinstance(module, torch.nn.BatchNorm2d):
-            module.train()
-    return None
+    pass

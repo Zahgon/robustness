@@ -8,9 +8,7 @@ __all__ = ["ResNet", "resnet50", "resnet101", "resnet152"]
 
 def conv3x3(in_planes, out_planes, stride=1):
     "3x3 convolution with padding"
-    return nn.Conv2d(
-        in_planes, out_planes, kernel_size=3, stride=stride, padding=1, bias=False
-    )
+    pass
 
 
 class Bottleneck(nn.Module):
@@ -35,38 +33,15 @@ class Bottleneck(nn.Module):
         gn_init(self.bn3, zero_init=True)
 
     def forward(self, x):
-        residual = x
-
-        out = self.conv1(x)
-        out = self.bn1(out)
-        out = self.relu(out)
-
-        out = self.conv2(out)
-        out = self.bn2(out)
-        out = self.relu(out)
-
-        out = self.conv3(out)
-        out = self.bn3(out)
-
-        if self.downsample is not None:
-            residual = self.downsample(x)
-
-        out += residual
-        out = self.relu(out)
-
-        return out
+        pass
 
 
 def conv2d_init(m):
-    assert isinstance(m, nn.Conv2d)
-    n = m.kernel_size[0] * m.kernel_size[1] * m.out_channels
-    m.weight.data.normal_(0, math.sqrt(2.0 / n))
+    pass
 
 
 def gn_init(m, zero_init=False):
-    assert isinstance(m, nn.GroupNorm)
-    m.weight.data.fill_(0.0 if zero_init else 1.0)
-    m.bias.data.zero_()
+    pass
 
 
 class ResNet(nn.Module):
@@ -90,58 +65,19 @@ class ResNet(nn.Module):
         gn_init(self.bn1)
 
     def _make_layer(self, block, planes, blocks, stride=1):
-        downsample = None
-        if stride != 1 or self.inplanes != planes * block.expansion:
-            downsample = nn.Sequential(
-                nn.Conv2d(
-                    self.inplanes,
-                    planes * block.expansion,
-                    kernel_size=1,
-                    stride=stride,
-                    bias=False,
-                ),
-                nn.GroupNorm(32, planes * block.expansion),
-            )
-            m = downsample[1]
-            assert isinstance(m, nn.GroupNorm)
-            gn_init(m)
-
-        layers = []
-        layers.append(block(self.inplanes, planes, stride, downsample))
-        self.inplanes = planes * block.expansion
-        for i in range(1, blocks):
-            layers.append(block(self.inplanes, planes))
-
-        return nn.Sequential(*layers)
+        pass
 
     def forward(self, x):
-        x = self.conv1(x)
-        x = self.bn1(x)
-        x = self.relu(x)
-        x = self.maxpool(x)
-
-        x = self.layer1(x)
-        x = self.layer2(x)
-        x = self.layer3(x)
-        x = self.layer4(x)
-
-        x = self.avgpool(x)
-        x = x.view(x.size(0), -1)
-        x = self.fc(x)
-
-        return x
+        pass
 
 
 def resnet50(**kwargs):
-    model = ResNet(Bottleneck, [3, 4, 6, 3], **kwargs)
-    return model
+    pass
 
 
 def resnet101(**kwargs):
-    model = ResNet(Bottleneck, [3, 4, 23, 3], **kwargs)
-    return model
+    pass
 
 
 def resnet152(**kwargs):
-    model = ResNet(Bottleneck, [3, 8, 36, 3], **kwargs)
-    return model
+    pass
